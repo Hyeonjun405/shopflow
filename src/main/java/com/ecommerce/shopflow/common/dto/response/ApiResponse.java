@@ -18,14 +18,14 @@ public class ApiResponse<T> {
     String errorMessage;
     T data;
 
-    public static <T> ApiResponse<T> ok() {
-        return ApiResponse.<T>builder().build();
+    public static <T> ResponseEntity<ApiResponse<T>> ok() {
+        return ResponseEntity.ok(ApiResponse.<T>builder().build());
     }
 
-    public static <T> ApiResponse<T> ok(T message) {
-        return ApiResponse.<T>builder()
-                .data(message)
-                .build();
+    public static <T> ResponseEntity<ApiResponse<T>> ok(T data) {
+        return ResponseEntity.ok(ApiResponse.<T>builder()
+                .data(data)
+                .build());
     }
 
     public static <T> ResponseEntity<ApiResponse<T>> fail(HttpStatus httpStatus, String errorMessage) {

@@ -2,7 +2,6 @@ package com.ecommerce.shopflow.global.exception;
 
 
 import com.ecommerce.shopflow.common.dto.response.ApiResponse;
-import com.ecommerce.shopflow.common.exception.DomainException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -15,8 +14,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(DomainException.class)
     public ResponseEntity<ApiResponse<Void>> handleException(DomainException ex) {
-        String message = ex.getMessage() != null ? ex.getMessage() : "서버 오류가 발생하였습니다.";
-        return ApiResponse.fail(ex.getHttpStatus(), message);
+        return ApiResponse.fail(ex.getHttpStatus(), ex.getMessage());
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
