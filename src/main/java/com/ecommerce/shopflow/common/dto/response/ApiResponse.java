@@ -28,6 +28,13 @@ public class ApiResponse<T> {
                 .build());
     }
 
+    public static <T> ResponseEntity<ApiResponse<T>> ok(HttpStatus httpStatus,T data) {
+        return ResponseEntity.status(httpStatus)
+                .body(ApiResponse.<T>builder()
+                    .data(data)
+                    .build());
+    }
+
     public static <T> ResponseEntity<ApiResponse<T>> fail(HttpStatus httpStatus, String errorMessage) {
         return ResponseEntity.status(httpStatus)
                 .body(ApiResponse.<T>builder()
