@@ -8,6 +8,7 @@ import com.ecommerce.shopflow.domain.user.dto.UserInfo;
 import com.ecommerce.shopflow.domain.user.dto.request.LoginRequest;
 import com.ecommerce.shopflow.domain.user.dto.request.SignUpRequest;
 import com.ecommerce.shopflow.domain.user.service.UserService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,23 +22,24 @@ public class UserController {
 
     private final UserService userService;
 
-    @PostMapping("/sign-up")
-    public ResponseEntity<ApiResponse<Void>> signUp(@RequestBody SignUpRequest request) {
-        userService.signUp(SignUpCommand.from(request));
-        return ApiResponse.ok(HttpStatus.CREATED, null);
-    }
-
-    @PostMapping("/login")
-    public ResponseEntity<ApiResponse<LoginInfo>> login(@RequestBody LoginRequest request) {
-        LoginInfo loginInfo = userService.login(LoginCommand.from(request));
-        return ApiResponse.ok(loginInfo);
-    }
-
     @GetMapping("/{userId}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<ApiResponse<UserInfo>> getUser(@PathVariable Long userId) {
         UserInfo userInfo = userService.getUser(userId);
         return ApiResponse.ok(userInfo);
     }
+
+    @PostMapping("/sign-up")
+    public ResponseEntity<ApiResponse<Void>> signUp(@RequestBody @Valid SignUpRequest request) {
+        userService.signUp(SignUpCommand.from(request));
+        return ApiResponse.ok(HttpStatus.CREATED, null);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<ApiResponse<LoginInfo >> login(@RequestBody @Valid LoginRequest request) {
+        LoginInfo loginInfo = userService.login(LoginCommand.from(request));
+        return ApiResponse.ok(loginInfo);
+    }
+
 
 }

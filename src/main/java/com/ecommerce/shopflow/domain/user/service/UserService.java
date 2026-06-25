@@ -12,6 +12,7 @@ import com.ecommerce.shopflow.global.jwt.JwtProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -21,6 +22,15 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
     private final JwtProvider jwtProvider;
 
+
+    @Transactional(readOnly = true)
+    public UserInfo getUser(Long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new DomainException(DomainExceptionCode.NOT_FOUND_USER));
+        return UserInfo.from(user);
+    }
+
+    @Transactional
     public void signUp(SignUpCommand command) {
         if (userRepository.existsByEmail(command.getEmail())) {
             throw new DomainException(DomainExceptionCode.DUPLICATE_EMAIL);
@@ -30,6 +40,7 @@ public class UserService {
         userRepository.save(user);
     }
 
+    @Transactional
     public LoginInfo login(LoginCommand command) {
         User user = userRepository.findByEmail(command.getEmail())
                 .orElseThrow(() -> new DomainException(DomainExceptionCode.NOT_FOUND_USER));
@@ -42,9 +53,4 @@ public class UserService {
         return LoginInfo.of(token, UserInfo.from(user));
     }
 
-    public UserInfo getUser(Long userId) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new DomainException(DomainExceptionCode.NOT_FOUND_USER));
-        return UserInfo.from(user);
-    }
 }
