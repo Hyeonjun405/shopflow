@@ -18,17 +18,7 @@ public class ApiResponse<T> {
     String errorMessage;
     T data;
 
-    public static <T> ResponseEntity<ApiResponse<T>> ok() {
-        return ResponseEntity.ok(ApiResponse.<T>builder().build());
-    }
-
-    public static <T> ResponseEntity<ApiResponse<T>> ok(T data) {
-        return ResponseEntity.ok(ApiResponse.<T>builder()
-                .data(data)
-                .build());
-    }
-
-    public static <T> ResponseEntity<ApiResponse<T>> ok(HttpStatus httpStatus,T data) {
+    public static <T> ResponseEntity<ApiResponse<T>> success(HttpStatus httpStatus,T data) {
         return ResponseEntity.status(httpStatus)
                 .body(ApiResponse.<T>builder()
                     .data(data)
