@@ -2,9 +2,9 @@ package com.ecommerce.shopflow.domain.product.service;
 
 import com.ecommerce.shopflow.domain.category.entity.Category;
 import com.ecommerce.shopflow.domain.category.repository.CategoryRepository;
-import com.ecommerce.shopflow.domain.product.dto.CreateProductCommand;
+import com.ecommerce.shopflow.domain.product.dto.command.CreateProductCommand;
 import com.ecommerce.shopflow.domain.product.dto.ProductInfo;
-import com.ecommerce.shopflow.domain.product.dto.UpdateProductCommand;
+import com.ecommerce.shopflow.domain.product.dto.command.UpdateProductCommand;
 import com.ecommerce.shopflow.domain.product.entity.Product;
 import com.ecommerce.shopflow.domain.product.repository.ProductRepository;
 import com.ecommerce.shopflow.global.exception.DomainException;

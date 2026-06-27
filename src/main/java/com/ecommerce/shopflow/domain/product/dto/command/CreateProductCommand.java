@@ -1,4 +1,4 @@
-package com.ecommerce.shopflow.domain.product.dto;
+package com.ecommerce.shopflow.domain.product.dto.command;
 
 import com.ecommerce.shopflow.domain.product.dto.request.CreateProductRequest;
 import lombok.AllArgsConstructor;
