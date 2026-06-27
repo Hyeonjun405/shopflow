@@ -27,7 +27,8 @@ public enum DomainExceptionCode {
   DUPLICATE_PRODUCT(HttpStatus.CONFLICT, "이미 존재하는 상품입니다."),
   NOT_FOUND_PRODUCT(HttpStatus.NOT_FOUND, "상품을 찾을 수 없습니다."),
 
-
+  CANNOT_CANCEL_ORDER(HttpStatus.BAD_REQUEST, "취소할 수 없는 주문입니다."),
+  NOT_FOUND_ORDER(HttpStatus.NOT_FOUND, "주문을 찾을 수 없습니다."),
   ;
 
   final HttpStatus status;
