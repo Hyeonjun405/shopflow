@@ -2,8 +2,8 @@ package com.ecommerce.shopflow.domain.category.controller;
 
 import com.ecommerce.shopflow.common.dto.response.ApiResponse;
 import com.ecommerce.shopflow.domain.category.dto.CategoryInfo;
-import com.ecommerce.shopflow.domain.category.dto.CreateCategoryCommand;
-import com.ecommerce.shopflow.domain.category.dto.UpdateCategoryCommand;
+import com.ecommerce.shopflow.domain.category.dto.command.CreateCategoryCommand;
+import com.ecommerce.shopflow.domain.category.dto.command.UpdateCategoryCommand;
 import com.ecommerce.shopflow.domain.category.dto.reqeust.CreateCategoryRequest;
 import com.ecommerce.shopflow.domain.category.dto.reqeust.UpdateCategoryRequest;
 import com.ecommerce.shopflow.domain.category.service.CategoryService;
@@ -27,7 +27,7 @@ public class CategoryController {
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<ApiResponse<Void>> createCategory(@RequestBody @Valid CreateCategoryRequest request) {
         categoryService.createCategory(CreateCategoryCommand.from(request));
-        return ApiResponse.ok(HttpStatus.CREATED, null);
+        return ApiResponse.success(HttpStatus.CREATED, null);
     }
 
     @PutMapping("/{categoryId}")
@@ -35,24 +35,24 @@ public class CategoryController {
     public ResponseEntity<ApiResponse<Void>> updateCategory(@PathVariable Long categoryId,
                                                             @RequestBody @Valid UpdateCategoryRequest request) {
         categoryService.updateCategory(categoryId, UpdateCategoryCommand.from(request));
-        return ApiResponse.ok();
+        return ApiResponse.success(HttpStatus.OK, null);
     }
 
     @DeleteMapping("/{categoryId}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<ApiResponse<Void>> deleteCategory(@PathVariable Long categoryId) {
         categoryService.deleteCategory(categoryId);
-        return ApiResponse.ok();
+        return ApiResponse.success(HttpStatus.OK, null);
     }
 
     @GetMapping
     public ResponseEntity<ApiResponse<List<CategoryInfo>>> getCategories() {
-        return ApiResponse.ok(categoryService.getCategories());
+        return ApiResponse.success(HttpStatus.OK, categoryService.getCategories());
     }
 
     @GetMapping("/{categoryId}")
     public ResponseEntity<ApiResponse<CategoryInfo>> getCategory(@PathVariable Long categoryId) {
-        return ApiResponse.ok(categoryService.getCategory(categoryId));
+        return ApiResponse.success(HttpStatus.OK, categoryService.getCategory(categoryId));
     }
 
 

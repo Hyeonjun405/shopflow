@@ -1,8 +1,8 @@
 package com.ecommerce.shopflow.domain.category.service;
 
 import com.ecommerce.shopflow.domain.category.dto.CategoryInfo;
-import com.ecommerce.shopflow.domain.category.dto.CreateCategoryCommand;
-import com.ecommerce.shopflow.domain.category.dto.UpdateCategoryCommand;
+import com.ecommerce.shopflow.domain.category.dto.command.CreateCategoryCommand;
+import com.ecommerce.shopflow.domain.category.dto.command.UpdateCategoryCommand;
 import com.ecommerce.shopflow.domain.category.entity.Category;
 import com.ecommerce.shopflow.domain.category.repository.CategoryRepository;
 import com.ecommerce.shopflow.global.exception.DomainException;

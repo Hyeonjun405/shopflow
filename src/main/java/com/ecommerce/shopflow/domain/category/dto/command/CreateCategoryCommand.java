@@ -1,4 +1,4 @@
-package com.ecommerce.shopflow.domain.category.dto;
+package com.ecommerce.shopflow.domain.category.dto.command;
 
 import com.ecommerce.shopflow.domain.category.dto.reqeust.CreateCategoryRequest;
 import lombok.AllArgsConstructor;
