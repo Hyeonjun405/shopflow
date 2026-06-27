@@ -1,8 +1,8 @@
 package com.ecommerce.shopflow.domain.user.service;
 
-import com.ecommerce.shopflow.domain.user.dto.LoginCommand;
+import com.ecommerce.shopflow.domain.user.dto.command.LoginCommand;
 import com.ecommerce.shopflow.domain.user.dto.LoginInfo;
-import com.ecommerce.shopflow.domain.user.dto.SignUpCommand;
+import com.ecommerce.shopflow.domain.user.dto.command.SignUpCommand;
 import com.ecommerce.shopflow.domain.user.dto.UserInfo;
 import com.ecommerce.shopflow.domain.user.entity.User;
 import com.ecommerce.shopflow.domain.user.repository.UserRepository;

@@ -1,4 +1,4 @@
-package com.ecommerce.shopflow.domain.user.dto;
+package com.ecommerce.shopflow.domain.user.dto.command;
 
 import com.ecommerce.shopflow.domain.user.dto.request.LoginRequest;
 import lombok.AllArgsConstructor;
