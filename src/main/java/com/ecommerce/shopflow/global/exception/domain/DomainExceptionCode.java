@@ -1,4 +1,4 @@
-package com.ecommerce.shopflow.global.exception;
+package com.ecommerce.shopflow.global.exception.domain;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

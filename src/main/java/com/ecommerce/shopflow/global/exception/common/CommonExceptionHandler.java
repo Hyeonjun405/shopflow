@@ -1,5 +1,4 @@
-package com.ecommerce.shopflow.global.exception;
-
+package com.ecommerce.shopflow.global.exception.common;
 
 import com.ecommerce.shopflow.common.dto.response.ApiResponse;
 import org.springframework.http.HttpStatus;
@@ -8,14 +7,8 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-
 @RestControllerAdvice
-public class GlobalExceptionHandler {
-
-    @ExceptionHandler(DomainException.class)
-    public ResponseEntity<ApiResponse<Void>> handleException(DomainException ex) {
-        return ApiResponse.fail(ex.getHttpStatus(), ex.getMessage());
-    }
+public class CommonExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ApiResponse<Void>> handleValidationException(MethodArgumentNotValidException ex) {
