@@ -1,8 +1,8 @@
 package com.ecommerce.shopflow.domain.product.entity;
 
 import com.ecommerce.shopflow.domain.category.entity.Category;
-import com.ecommerce.shopflow.global.exception.DomainException;
-import com.ecommerce.shopflow.global.exception.DomainExceptionCode;
+import com.ecommerce.shopflow.global.exception.domain.DomainException;
+import com.ecommerce.shopflow.global.exception.domain.DomainExceptionCode;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;

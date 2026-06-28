@@ -2,8 +2,8 @@ package com.ecommerce.shopflow.domain.order.entity;
 
 import com.ecommerce.shopflow.common.enums.order.OrderStatus;
 import com.ecommerce.shopflow.domain.user.entity.User;
-import com.ecommerce.shopflow.global.exception.DomainException;
-import com.ecommerce.shopflow.global.exception.DomainExceptionCode;
+import com.ecommerce.shopflow.global.exception.domain.DomainException;
+import com.ecommerce.shopflow.global.exception.domain.DomainExceptionCode;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;

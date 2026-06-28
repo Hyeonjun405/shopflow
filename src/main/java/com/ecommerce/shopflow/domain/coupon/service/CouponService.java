@@ -9,10 +9,9 @@ import com.ecommerce.shopflow.domain.coupon.repository.CouponRepository;
 import com.ecommerce.shopflow.domain.coupon.repository.UserCouponRepository;
 import com.ecommerce.shopflow.domain.user.entity.User;
 import com.ecommerce.shopflow.domain.user.repository.UserRepository;
-import com.ecommerce.shopflow.global.exception.DomainException;
-import com.ecommerce.shopflow.global.exception.DomainExceptionCode;
+import com.ecommerce.shopflow.global.exception.domain.DomainException;
+import com.ecommerce.shopflow.global.exception.domain.DomainExceptionCode;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.DetachedObjectException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
