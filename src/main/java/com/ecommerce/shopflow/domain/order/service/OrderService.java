@@ -1,5 +1,8 @@
 package com.ecommerce.shopflow.domain.order.service;
 
+import com.ecommerce.shopflow.domain.coupon.entity.Coupon;
+import com.ecommerce.shopflow.domain.coupon.entity.UserCoupon;
+import com.ecommerce.shopflow.domain.coupon.service.CouponService;
 import com.ecommerce.shopflow.domain.order.dto.command.CreateOrderCommand;
 import com.ecommerce.shopflow.domain.order.dto.command.CreateOrderItemCommand;
 import com.ecommerce.shopflow.domain.order.dto.OrderInfo;
@@ -29,6 +32,7 @@ public class OrderService {
     private final OrderItemRepository orderItemRepository;
     private final ProductRepository productRepository;
     private final UserRepository userRepository;
+    private final CouponService couponService;
 
     @Transactional
     public void updateOrderStatus(Long orderId, UpdateOrderStatusCommand command) {
@@ -41,12 +45,10 @@ public class OrderService {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new DomainException(DomainExceptionCode.NOT_FOUND_USER));
 
+        Order savedOrder = orderRepository.save(Order.create(user, 0));
+
         int totalPrice = 0;
         List<OrderItem> orderItems = new ArrayList<>();
-
-
-        Order newOrder = Order.create(user, 0);
-        Order savedOrder = orderRepository.save(newOrder);
 
         for (CreateOrderItemCommand itemCommand : command.getItems()) {
             Product product = productRepository.findById(itemCommand.getProductId())
@@ -60,6 +62,32 @@ public class OrderService {
         }
 
         orderItemRepository.saveAll(orderItems);
+
+        // 쿠폰 적용
+        if (command.getUserCouponId() != null) {
+            UserCoupon userCoupon = couponService.validateAndGetUserCoupon(userId, command.getUserCouponId());
+            Coupon coupon = userCoupon.getCoupon();
+
+            if (totalPrice < coupon.getMinOrderPrice()) {
+                throw new DomainException(DomainExceptionCode.NOT_MEET_MIN_ORDER_PRICE);
+            }
+
+            int discount = switch (coupon.getCouponType()) {
+                case ORDER -> coupon.calculateDiscount(totalPrice);
+                case PRODUCT -> orderItems.stream()
+                        .filter(item -> item.getProduct().getId().equals(coupon.getTargetId()))
+                        .mapToInt(item -> coupon.calculateDiscount(item.getPrice()))
+                        .sum();
+                case CATEGORY -> orderItems.stream()
+                        .filter(item -> item.getProduct().getCategory().getId().equals(coupon.getTargetId()))
+                        .mapToInt(item -> coupon.calculateDiscount(item.getPrice()))
+                        .sum();
+            };
+
+            totalPrice -= discount;
+            userCoupon.use();
+        }
+
         savedOrder.updateTotalPrice(totalPrice);
     }
 

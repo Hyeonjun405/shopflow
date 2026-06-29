@@ -30,6 +30,7 @@ public enum DomainExceptionCode {
   //Order
   CANNOT_CANCEL_ORDER(HttpStatus.BAD_REQUEST, "취소할 수 없는 주문입니다."),
   NOT_FOUND_ORDER(HttpStatus.NOT_FOUND, "주문을 찾을 수 없습니다."),
+  NOT_MEET_MIN_ORDER_PRICE(HttpStatus.BAD_REQUEST, "최소 주문금액을 충족하지 못했습니다."),
 
   // coupon
   COUPON_OUT_OF_STOCK(HttpStatus.BAD_REQUEST, "쿠폰이 모두 소진되었습니다."),

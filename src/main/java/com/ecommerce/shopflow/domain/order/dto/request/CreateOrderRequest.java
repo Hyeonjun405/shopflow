@@ -14,4 +14,6 @@ public class CreateOrderRequest {
 
     @NotEmpty(message = "주문 상품은 필수입니다")
     private List<CreateOrderItemRequest> items;
+
+    private Long userCouponId;
 }
