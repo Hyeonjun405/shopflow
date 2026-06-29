@@ -26,3 +26,9 @@ server:
 jwt:
   secret: shopflow-secret-key-must-be-at-least-256-bits-long
   expiration: 3600000
+
+
+logging:
+  level:
+    com.ecommerce.shopflow: DEBUG
+    org.hibernate.SQL: DEBUG
