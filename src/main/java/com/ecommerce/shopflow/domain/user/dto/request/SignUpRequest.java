@@ -22,4 +22,10 @@ public class SignUpRequest {
 
     @NotBlank(message = "이름은 필수입니다")
     private String name;
+
+    @NotBlank(message = "휴대폰 번호는 필수입니다")
+    private String phoneNumber;
+
+    @NotBlank(message = "주소는 필수입니다")
+    private String address;
 }

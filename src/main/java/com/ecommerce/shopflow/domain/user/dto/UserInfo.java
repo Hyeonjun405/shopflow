@@ -13,6 +13,8 @@ public class UserInfo {
     private Long id;
     private String email;
     private String name;
+    private String phoneNumber;
+    private String address;
     private UserRole role;
 
     public static UserInfo from(User user) {
@@ -20,6 +22,8 @@ public class UserInfo {
                 user.getId(),
                 user.getEmail(),
                 user.getName(),
+                user.getPhoneNumber(),
+                user.getAddress(),
                 user.getRole()
         );
     }
