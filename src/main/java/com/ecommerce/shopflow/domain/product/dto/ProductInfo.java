@@ -16,6 +16,7 @@ public class ProductInfo {
     private int stock;
     private Long categoryId;
     private String categoryName;
+    private Long sellerId;
 
     public static ProductInfo from(Product product) {
         return new ProductInfo(
@@ -25,7 +26,8 @@ public class ProductInfo {
                 product.getPrice(),
                 product.getStock(),
                 product.getCategory() != null ? product.getCategory().getId() : null,
-                product.getCategory() != null ? product.getCategory().getName() : null
+                product.getCategory() != null ? product.getCategory().getName() : null,
+                product.getSeller().getId()
         );
     }
 }
